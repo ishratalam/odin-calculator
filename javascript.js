@@ -1,12 +1,26 @@
 console.log('Hello');
+/*
+Write basic arithmatic functions
+All button names get the value from thier innerText
+Write function to display the current pressed button, it will add to existing data of display, so that full operation is visible in display
+Now for the calculation part, we can follow two approach
+First : Store the num1 when pressing the operator btn
+    Then get the second number when pressing = btn, by splitting the current display
+Second: when pressing the = btn, split and assing num1, num2, and perform operation
+
+For enabling single decimal, used disable attr of button 
+*/
+
 
 var num1 = "";
 var num2 = "";
 var operator = "";
+var dotPressed = 0;
 
-const buttonDisplay = document.querySelector(".display");
-const buttonClear = document.querySelector(".clear");
-const buttonDelete = document.querySelector(".delete");
+const buttonDisplay = document.querySelector(".display")
+const buttonClear = document.querySelector(".clear")
+const buttonDelete = document.querySelector(".delete")
+const buttonDot = document.querySelector("#dot");
 
 
 function add(a, b) {
@@ -26,26 +40,43 @@ function multiply(a,b) {
 
 // functions to display current number , 
 let curData = "";
-function displayNum(num) {
+function setDisplay(num) {
     let curData = buttonDisplay.innerText;
     buttonDisplay.innerHTML = `${curData}${num}`;
 }
 
 function clearDisplay() {
     buttonDisplay.innerHTML = "";
+    resetDecimal(buttonDot);
 }
 
+function setDecimal(button) {
+    if (dotPressed === 0) {
+        button.disabled = true;
+        dotPressed = 1;
+    } 
+}
+function resetDecimal(button) {
+    dotPressed = 0;
+    button.disabled = false;
+}
 
 
 const allBtns = document.querySelectorAll(".numButton");
 allBtns.forEach((button) => {
     button.addEventListener('click', () => {
+        // logic for pressing dot only one time : 
+        if (button.innerText===".") {
+            setDecimal(button);
+        }
         const num = button.innerText;
         // console.log(num);
-        // get cur number from display and append the new number from displayNum function 
-        displayNum(num);
+        // get cur number from display and append the new number from setDisplay function 
+        setDisplay(num);
     })
 })
+
+
 
 // logic to clear the data and display
 buttonClear.addEventListener('click', () => {
@@ -59,7 +90,7 @@ buttonDelete.addEventListener('click', () => {
     const newNumber = Number(currentValue.toString().slice(0,-1));
     console.log(`New Number : ${newNumber}`);
     clearDisplay();
-    displayNum(newNumber);
+    setDisplay(newNumber);
 });
 
 console.log(num1)
@@ -90,7 +121,7 @@ allOperatorButtons.forEach((button) => {
          num1 = Number(curData.replace(/[/*+-]/g, ''));
         // num1 = buttonDisplay.innerHTML;
         clearDisplay();
-        displayNum(`${num1}${operator}`);
+        setDisplay(`${num1}${operator}`);
 
     });
 })
@@ -121,10 +152,14 @@ equalButton.addEventListener('click', () => {
     }
     //Update the display
     clearDisplay();
-    displayNum(result);
-    num1="";num2="";operator="";
     console.log(`Result: ${result}`);
+
+    //check for overlfow due to display width 
+    if (result.toString().split('').length > 13) {
+        result = result.toFixed(13);
+    }
+    setDisplay(result);
+    num1="";num2="";operator="";
 })
 
 clearDisplay() 
-
