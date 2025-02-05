@@ -61,6 +61,7 @@ body {
 button {
     flex: 1;
     border-radius: 10px;
+    font-size: 2rem;
 }
 .equalButton {
     flex: 1;
