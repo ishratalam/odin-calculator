@@ -1,0 +1,85 @@
+body {
+    background-color: bisque;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px;
+    gap: 0px;
+    padding: 0px;
+    
+}
+
+.container {
+    display: flex;
+    width: 600px;
+    min-height: 600px;
+    border: 2px solid black;
+    flex-direction: column;
+    margin: 0 auto;
+    align-items: center;
+    border-radius: 10px;
+    background-color: gray;
+}
+
+.display {
+    width: 90%;
+    height: 80px;
+    border: 1px solid greenyellow;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin: 10px;
+    background-color: aquamarine;
+    text-align: right;
+    font-size: 4rem;
+    border-radius: 10px;
+}
+.keypad {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 420px;
+    border: 1px solid greenyellow;
+    justify-content: center;
+    padding: 10px;
+    margin: 5px;
+    /* overflow-wrap: anywhere; */
+    border-radius: 10px;
+    background-color: darkolivegreen;
+
+}
+
+.row {
+    display: flex;
+    /* width: 90%; */
+    gap: 5px;
+    min-height: 80px;
+    margin-top: 5px;
+    /* margin-left: 5px; */
+}
+
+button {
+    flex: 1;
+    border-radius: 10px;
+}
+.equalButton {
+    flex: 2.15;
+}
+button:hover {
+    background-color: lightseagreen;
+}
+
+.numButton {
+    background-color: dodgerblue;
+}
+
+
+.operatorButton {
+    background-color: darkorange;
+}
+.equalButton {
+    background-color: olivedrab;
+}
+.clear, .delete {
+    background-color: palegreen;
+}
